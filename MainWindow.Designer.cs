@@ -31,6 +31,7 @@
             BtnSelectScript = new Button();
             BtnRunScript = new Button();
             LblCurrentScript = new Label();
+            ChkRunAsAdmin = new CheckBox();
             SuspendLayout();
             // 
             // BtnSelectScript
@@ -61,11 +62,22 @@
             LblCurrentScript.Size = new Size(0, 15);
             LblCurrentScript.TabIndex = 2;
             // 
+            // ChkRunAsAdmin
+            // 
+            ChkRunAsAdmin.AutoSize = true;
+            ChkRunAsAdmin.Location = new Point(12, 9);
+            ChkRunAsAdmin.Name = "ChkRunAsAdmin";
+            ChkRunAsAdmin.Size = new Size(137, 19);
+            ChkRunAsAdmin.TabIndex = 3;
+            ChkRunAsAdmin.Text = "Run as Administrator";
+            ChkRunAsAdmin.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(284, 111);
+            Controls.Add(ChkRunAsAdmin);
             Controls.Add(LblCurrentScript);
             Controls.Add(BtnRunScript);
             Controls.Add(BtnSelectScript);
@@ -80,5 +92,6 @@
         public Button BtnSelectScript;
         public Button BtnRunScript;
         public Label LblCurrentScript;
+        public CheckBox ChkRunAsAdmin;
     }
 }

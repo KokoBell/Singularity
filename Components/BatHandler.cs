@@ -45,5 +45,23 @@ namespace Singularity.Components
                 throw new ArgumentException("Invalid .bat file path provided");
             }
         }
+
+        public void RunScriptAsAdmin()
+        {
+            if (Path.GetExtension(currentScript).Equals(".bat", StringComparison.OrdinalIgnoreCase) && File.Exists(currentScript))
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.Arguments = $"/c \"{currentScript}\"";
+                process.StartInfo.UseShellExecute = true; // UseShellExecute set to true to run with elevated privileges
+                process.StartInfo.Verb = "runas"; // Run the process as administrator
+                process.Start();
+                process.WaitForExit();
+            }
+            else
+            {
+                throw new ArgumentException("Invalid .bat file path provided");
+            }
+        }
     }
 }

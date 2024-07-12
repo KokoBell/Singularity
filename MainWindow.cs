@@ -13,11 +13,18 @@ namespace Singularity
 
         private void BtnSelectScript_Click(object sender, EventArgs e)
         {
+            
             LblCurrentScript.Text = Path.GetFileName(scriptHandler.SelectScript());
         }
 
         private void BtnRunScript_Click(object sender, EventArgs e)
         {
+            if (ChkRunAsAdmin.Checked)
+            {
+                scriptHandler.RunScriptAsAdmin();
+                return;
+            }
+ 
             scriptHandler.RunScript();
         }
     }
