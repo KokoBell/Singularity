@@ -30,13 +30,15 @@
         {
             BtnSelectScript = new Button();
             BtnRunScript = new Button();
-            LblCurrentScript = new Label();
             ChkRunAsAdmin = new CheckBox();
+            flLayout = new FlowLayoutPanel();
+            txtFileName = new TextBox();
+            flLayout.SuspendLayout();
             SuspendLayout();
             // 
             // BtnSelectScript
             // 
-            BtnSelectScript.Location = new Point(12, 76);
+            BtnSelectScript.Location = new Point(12, 103);
             BtnSelectScript.Name = "BtnSelectScript";
             BtnSelectScript.Size = new Size(94, 23);
             BtnSelectScript.TabIndex = 0;
@@ -46,21 +48,13 @@
             // 
             // BtnRunScript
             // 
-            BtnRunScript.Location = new Point(122, 76);
+            BtnRunScript.Location = new Point(127, 103);
             BtnRunScript.Name = "BtnRunScript";
             BtnRunScript.Size = new Size(94, 23);
             BtnRunScript.TabIndex = 1;
             BtnRunScript.Text = "Run Script";
             BtnRunScript.UseVisualStyleBackColor = true;
             BtnRunScript.Click += BtnRunScript_Click;
-            // 
-            // LblCurrentScript
-            // 
-            LblCurrentScript.AutoSize = true;
-            LblCurrentScript.Location = new Point(17, 31);
-            LblCurrentScript.Name = "LblCurrentScript";
-            LblCurrentScript.Size = new Size(0, 15);
-            LblCurrentScript.TabIndex = 2;
             // 
             // ChkRunAsAdmin
             // 
@@ -72,18 +66,42 @@
             ChkRunAsAdmin.Text = "Run as Administrator";
             ChkRunAsAdmin.UseVisualStyleBackColor = true;
             // 
+            // flLayout
+            // 
+            flLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            flLayout.AutoSize = true;
+            flLayout.BackColor = SystemColors.Control;
+            flLayout.Controls.Add(txtFileName);
+            flLayout.Location = new Point(12, 34);
+            flLayout.Name = "flLayout";
+            flLayout.Size = new Size(214, 54);
+            flLayout.TabIndex = 4;
+            // 
+            // txtFileName
+            // 
+            txtFileName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtFileName.Location = new Point(3, 3);
+            txtFileName.Multiline = true;
+            txtFileName.Name = "txtFileName";
+            txtFileName.ReadOnly = true;
+            txtFileName.Size = new Size(208, 48);
+            txtFileName.TabIndex = 0;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(284, 111);
+            ClientSize = new Size(244, 141);
+            Controls.Add(flLayout);
             Controls.Add(ChkRunAsAdmin);
-            Controls.Add(LblCurrentScript);
             Controls.Add(BtnRunScript);
             Controls.Add(BtnSelectScript);
-            MaximumSize = new Size(300, 150);
+            MaximizeBox = false;
+            MaximumSize = new Size(260, 180);
             Name = "MainWindow";
             Text = "Singularity";
+            flLayout.ResumeLayout(false);
+            flLayout.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -91,7 +109,8 @@
         #endregion
         public Button BtnSelectScript;
         public Button BtnRunScript;
-        public Label LblCurrentScript;
         public CheckBox ChkRunAsAdmin;
+        private FlowLayoutPanel flLayout;
+        public TextBox txtFileName;
     }
 }

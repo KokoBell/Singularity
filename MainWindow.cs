@@ -1,31 +1,34 @@
-using Singularity.Components;
 using Singularity.Interfaces;
 
 namespace Singularity
 {
     public partial class MainWindow : Form
     {
-        public IScriptHandler scriptHandler = new BatHandler();
-        public MainWindow()
+        private readonly IScriptHandler _scriptHandler;
+        public MainWindow(IScriptHandler scriptHandler)
         {
+            _scriptHandler = scriptHandler;
             InitializeComponent();
         }
 
         private void BtnSelectScript_Click(object sender, EventArgs e)
         {
+            txtFileName.Text = _scriptHandler.SelectScript();
             
-            LblCurrentScript.Text = Path.GetFileName(scriptHandler.SelectScript());
+            //LblCurrentScript.Text = Path.GetFileName(_scriptHandler.SelectScript());
         }
 
         private void BtnRunScript_Click(object sender, EventArgs e)
         {
-            if (ChkRunAsAdmin.Checked)
+            if (!ChkRunAsAdmin.Checked)
             {
-                scriptHandler.RunScriptAsAdmin();
+                _scriptHandler.RunScript();
+            }
+            else
+            {
+                _scriptHandler.RunScriptAsAdmin();
                 return;
             }
- 
-            scriptHandler.RunScript();
         }
     }
 }
