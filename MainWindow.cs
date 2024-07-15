@@ -15,7 +15,6 @@ namespace Singularity
         {
             txtFileName.Text = _scriptHandler.SelectScript();
             txtFileName.ReadOnly = false;
-            //LblCurrentScript.Text = Path.GetFileName(_scriptHandler.SelectScript());
         }
 
         private void BtnRunScript_Click(object sender, EventArgs e)
