@@ -32,6 +32,22 @@ namespace Singularity.Components
 
         public void RunScript(string[] args)
         {
+            if (string.IsNullOrEmpty(currentScript)) return;
+
+            switch (args.Length)
+            {
+                case 0:
+                    return;
+                case 1:
+                    RunScript();
+                    break;
+                default:
+                    if (_fileChecker.CheckFileType(currentScript, "bat"))
+                    {
+                        _processExecutor.ExecuteBatScript(currentScript, args);
+                    }
+                    break;
+            }
         }
 
         public void RunScript()

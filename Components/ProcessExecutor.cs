@@ -31,7 +31,9 @@ namespace Singularity.Components
 
         private void SetupScriptArguments(string filePath, string[] args)
         {
-            
+            SetupScriptOptions(filePath);
+            string fullArgs = $"/c {string.Join(' ', args).Replace(filePath, $"\"{filePath}\"")}";
+            ProcessToExecute.StartInfo.Arguments = fullArgs;
         }
 
         private void StartProcess()
@@ -49,6 +51,12 @@ namespace Singularity.Components
         public void ExecuteBatScriptAsAdmin(string filePath)
         {
             SetupScriptAdmin(filePath);
+            StartProcess();
+        }
+
+        public void ExecuteBatScript(string filePath, string[] args)
+        {
+            SetupScriptArguments(filePath, args);
             StartProcess();
         }
     }

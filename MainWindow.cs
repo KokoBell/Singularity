@@ -14,15 +14,17 @@ namespace Singularity
         private void BtnSelectScript_Click(object sender, EventArgs e)
         {
             txtFileName.Text = _scriptHandler.SelectScript();
-            
+            txtFileName.ReadOnly = false;
             //LblCurrentScript.Text = Path.GetFileName(_scriptHandler.SelectScript());
         }
 
         private void BtnRunScript_Click(object sender, EventArgs e)
         {
+            string[] arguments = txtFileName.Text.Split(' ', StringSplitOptions.None);
+
             if (!ChkRunAsAdmin.Checked)
             {
-                _scriptHandler.RunScript();
+                _scriptHandler.RunScript(arguments);
             }
             else
             {
