@@ -28,7 +28,7 @@ namespace Singularity
             }
             else
             {
-                _scriptHandler.RunScriptAsAdmin();
+                _scriptHandler.RunScriptAsAdmin(arguments);
                 return;
             }
         }

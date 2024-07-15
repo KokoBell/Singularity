@@ -12,5 +12,6 @@ namespace Singularity.Interfaces
         void RunScript();
         void RunScript(string[] args);
         void RunScriptAsAdmin();
+        void RunScriptAsAdmin(string[] args);
     }
 }

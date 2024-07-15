@@ -1,10 +1,4 @@
 ﻿using Singularity.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Singularity.Components
 {
@@ -75,6 +69,26 @@ namespace Singularity.Components
             else
             {
                 throw new ArgumentException("Invalid file path provided");
+            }
+        }
+
+        public void RunScriptAsAdmin(string[] args)
+        {
+            if (string.IsNullOrEmpty(currentScript)) return;
+
+            switch (args.Length)
+            {
+                case 0:
+                    return;
+                case 1:
+                    RunScriptAsAdmin();
+                    break;
+                default:
+                    if (_fileChecker.CheckFileType(currentScript, "bat"))
+                    {
+                        _processExecutor.ExecuteBatScriptAsAdmin(currentScript, args);
+                    }
+                    break;
             }
         }
     }

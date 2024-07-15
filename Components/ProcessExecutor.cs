@@ -13,6 +13,8 @@ namespace Singularity.Components
             ProcessToExecute = new Process();
         }
 
+        #region Private Methods
+
         private void SetupScriptOptions(string filePath) 
         {
             ProcessToExecute.StartInfo.FileName = "cmd.exe";
@@ -23,8 +25,6 @@ namespace Singularity.Components
 
         private void SetupScriptAdmin(string filePath)
         {
-            SetupScriptOptions(filePath);
-
             ProcessToExecute.StartInfo.UseShellExecute = true; // UseShellExecute set to true to run with elevated privileges
             ProcessToExecute.StartInfo.Verb = "runas"; // Run the process as administrator
         }
@@ -36,11 +36,19 @@ namespace Singularity.Components
             ProcessToExecute.StartInfo.Arguments = fullArgs;
         }
 
+        private void SetupScriptArgumentsAdmin(string filePath, string[] args)
+        {
+            SetupScriptArguments(filePath, args);
+            SetupScriptAdmin(filePath);
+        }
+
         private void StartProcess()
         {
             ProcessToExecute.Start();
             ProcessToExecute.WaitForExit();
         }
+
+        #endregion
 
         public void ExecuteBatScript(string filePath)
         {
@@ -48,15 +56,22 @@ namespace Singularity.Components
             StartProcess();
         }
 
+        public void ExecuteBatScript(string filePath, string[] args)
+        {
+            SetupScriptArguments(filePath, args);
+            StartProcess();
+        }
+
         public void ExecuteBatScriptAsAdmin(string filePath)
         {
+            SetupScriptOptions(filePath);
             SetupScriptAdmin(filePath);
             StartProcess();
         }
 
-        public void ExecuteBatScript(string filePath, string[] args)
+        public void ExecuteBatScriptAsAdmin(string filePath, string[] args)
         {
-            SetupScriptArguments(filePath, args);
+            SetupScriptArgumentsAdmin(filePath, args);
             StartProcess();
         }
     }
