@@ -34,20 +34,22 @@ namespace Singularity.Components
             
         }
 
+        private void StartProcess()
+        {
+            ProcessToExecute.Start();
+            ProcessToExecute.WaitForExit();
+        }
+
         public void ExecuteBatScript(string filePath)
         {
             SetupScriptOptions(filePath);
-           
-            ProcessToExecute.Start();
-            ProcessToExecute.WaitForExit();
+            StartProcess();
         }
 
         public void ExecuteBatScriptAsAdmin(string filePath)
         {
             SetupScriptAdmin(filePath);
-
-            ProcessToExecute.Start();
-            ProcessToExecute.WaitForExit();
+            StartProcess();
         }
     }
 }
