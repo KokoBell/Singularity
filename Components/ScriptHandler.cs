@@ -2,22 +2,24 @@
 
 namespace Singularity.Components
 {
-    public class BatHandler : IScriptHandler
+    public class ScriptHandler : IScriptHandler
     {
         public string currentScript = string.Empty;
-        private readonly IProcessExecutor _processExecutor;
-        public BatHandler(IProcessExecutor processExecutor)
+        public IProcessExecutor? processExecutor;
+        private readonly IFileChecker _fileChecker;
+
+        public ScriptHandler(IFileChecker fileChecker)
         {
-            _processExecutor = processExecutor;
+            _fileChecker = fileChecker;
         }
 
         public string SelectScript()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Bat Files|*.bat";
+            OpenFileDialog openFileDialog = new();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 currentScript = openFileDialog.FileName;
+                processExecutor = _fileChecker.GetExecutor(currentScript);
             }
 
             return currentScript;
@@ -35,7 +37,7 @@ namespace Singularity.Components
                     RunScript();
                     break;
                 default:
-                    _processExecutor.ExecuteProcess(currentScript, args);
+                    processExecutor?.ExecuteProcess(currentScript, args);
                     break;
             }
         }
@@ -44,34 +46,14 @@ namespace Singularity.Components
         {
             if (string.IsNullOrEmpty(currentScript)) return;
 
-            _processExecutor.ExecuteProcess(currentScript);
-        }
-
-        public bool RunScriptReturnValue(string[] args)
-        {
-            if (string.IsNullOrEmpty(currentScript)) return false;
-
-            switch (args.Length)
-            {
-                case 0:
-                    return false;
-                case 1:
-                    RunScript();
-                    break;
-                default:
-                    _processExecutor.ExecuteProcess(currentScript, args);
-                    break;
-
-            }
-
-            return true;
+            processExecutor?.ExecuteProcess(currentScript);
         }
 
         public void RunScriptAsAdmin()
         {
             if (string.IsNullOrEmpty(currentScript)) return;
 
-            _processExecutor.ExecuteProcessAsAdmin(currentScript);
+            processExecutor?.ExecuteProcessAsAdmin(currentScript);
         }
 
         public void RunScriptAsAdmin(string[] args)
@@ -86,7 +68,7 @@ namespace Singularity.Components
                     RunScriptAsAdmin();
                     break;
                 default:
-                    _processExecutor.ExecuteProcessAsAdmin(currentScript, args);
+                    processExecutor?.ExecuteProcessAsAdmin(currentScript, args);
                     break;
             }
         }
