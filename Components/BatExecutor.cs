@@ -1,5 +1,4 @@
 ﻿using Singularity.Interfaces;
-using System;
 using System.Diagnostics;
 
 namespace Singularity.Components

@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
+﻿using Singularity.Interfaces;
+using System.Diagnostics;
 
-namespace Singularity.Interfaces
+namespace Singularity.Components
 {
     public class PythonExecutor : IProcessExecutor
     {

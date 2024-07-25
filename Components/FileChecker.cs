@@ -1,5 +1,4 @@
 ﻿using Singularity.Interfaces;
-using System.Diagnostics;
 
 namespace Singularity.Components
 {
@@ -10,6 +9,7 @@ namespace Singularity.Components
         {
             {".bat", new BatExecutor() },
             {".py", new PythonExecutor() },
+            {".ps1", new PowershellExecutor() }
         };
 
         public bool CheckFileType(string filePath, string fileExtension)
