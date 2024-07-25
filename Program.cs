@@ -1,4 +1,5 @@
 using Singularity.Components;
+using Singularity.Interfaces;
 
 namespace Singularity
 {
@@ -13,7 +14,7 @@ namespace Singularity
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainWindow(new ScriptHandler(new FileChecker(), new ProcessExecutor())));
+            Application.Run(new MainWindow(new PythonHandler(new PythonExecutor())));
         }
     }
 }

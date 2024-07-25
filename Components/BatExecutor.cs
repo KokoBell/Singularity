@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace Singularity.Components
 {
-    public class ProcessExecutor : IProcessExecutor
+    public class BatExecutor : IProcessExecutor
     {
         public Process ProcessToExecute;
 
-        public ProcessExecutor()
+        public BatExecutor()
         {
             ProcessToExecute = new Process();
         }
@@ -50,26 +50,26 @@ namespace Singularity.Components
 
         #endregion
 
-        public void ExecuteBatScript(string filePath)
+        public void ExecuteProcess(string filePath)
         {
             SetupScriptOptions(filePath);
             StartProcess();
         }
 
-        public void ExecuteBatScript(string filePath, string[] args)
+        public void ExecuteProcess(string filePath, string[] args)
         {
             SetupScriptArguments(filePath, args);
             StartProcess();
         }
 
-        public void ExecuteBatScriptAsAdmin(string filePath)
+        public void ExecuteProcessAsAdmin(string filePath)
         {
             SetupScriptOptions(filePath);
             SetupScriptAdmin(filePath);
             StartProcess();
         }
 
-        public void ExecuteBatScriptAsAdmin(string filePath, string[] args)
+        public void ExecuteProcessAsAdmin(string filePath, string[] args)
         {
             SetupScriptArgumentsAdmin(filePath, args);
             StartProcess();

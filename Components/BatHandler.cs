@@ -2,20 +2,19 @@
 
 namespace Singularity.Components
 {
-    public class ScriptHandler : IScriptHandler
+    public class BatHandler : IScriptHandler
     {
         public string currentScript = string.Empty;
-        private readonly IFileChecker _fileChecker;
         private readonly IProcessExecutor _processExecutor;
-        public ScriptHandler(IFileChecker fileChecker, IProcessExecutor processExecutor)
+        public BatHandler(IProcessExecutor processExecutor)
         {
-            _fileChecker = fileChecker;
             _processExecutor = processExecutor;
         }
 
         public string SelectScript()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Bat Files|*.bat";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 currentScript = openFileDialog.FileName;
@@ -36,10 +35,7 @@ namespace Singularity.Components
                     RunScript();
                     break;
                 default:
-                    if (_fileChecker.CheckFileType(currentScript, "bat"))
-                    {
-                        _processExecutor.ExecuteBatScript(currentScript, args);
-                    }
+                    _processExecutor.ExecuteProcess(currentScript, args);
                     break;
             }
         }
@@ -48,28 +44,34 @@ namespace Singularity.Components
         {
             if (string.IsNullOrEmpty(currentScript)) return;
 
-            if (_fileChecker.CheckFileType(currentScript, "bat"))
+            _processExecutor.ExecuteProcess(currentScript);
+        }
+
+        public bool RunScriptReturnValue(string[] args)
+        {
+            if (string.IsNullOrEmpty(currentScript)) return false;
+
+            switch (args.Length)
             {
-                _processExecutor.ExecuteBatScript(currentScript);
+                case 0:
+                    return false;
+                case 1:
+                    RunScript();
+                    break;
+                default:
+                    _processExecutor.ExecuteProcess(currentScript, args);
+                    break;
+
             }
-            else
-            {
-                throw new ArgumentException("Invalid file path provided");
-            }
+
+            return true;
         }
 
         public void RunScriptAsAdmin()
         {
             if (string.IsNullOrEmpty(currentScript)) return;
 
-            if (_fileChecker.CheckFileType(currentScript, "bat"))
-            {
-                _processExecutor.ExecuteBatScriptAsAdmin(currentScript);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid file path provided");
-            }
+            _processExecutor.ExecuteProcessAsAdmin(currentScript);
         }
 
         public void RunScriptAsAdmin(string[] args)
@@ -84,10 +86,7 @@ namespace Singularity.Components
                     RunScriptAsAdmin();
                     break;
                 default:
-                    if (_fileChecker.CheckFileType(currentScript, "bat"))
-                    {
-                        _processExecutor.ExecuteBatScriptAsAdmin(currentScript, args);
-                    }
+                    _processExecutor.ExecuteProcessAsAdmin(currentScript, args);
                     break;
             }
         }

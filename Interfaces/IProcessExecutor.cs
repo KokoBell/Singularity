@@ -2,9 +2,9 @@
 {
     public interface IProcessExecutor
     {
-        void ExecuteBatScript(string filePath);
-        void ExecuteBatScript(string filePath, string[] args);
-        void ExecuteBatScriptAsAdmin(string filePath);
-        void ExecuteBatScriptAsAdmin(string filePath, string[] args);
+        void ExecuteProcess(string filePath);
+        void ExecuteProcess(string filePath, string[] args);
+        void ExecuteProcessAsAdmin(string filePath);
+        void ExecuteProcessAsAdmin(string filePath, string[] args);
     }
 }

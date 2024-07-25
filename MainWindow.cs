@@ -28,7 +28,6 @@ namespace Singularity
             else
             {
                 _scriptHandler.RunScriptAsAdmin(arguments);
-                return;
             }
         }
     }
