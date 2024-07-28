@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             BtnSelectScript = new Button();
             BtnRunScript = new Button();
             ChkRunAsAdmin = new CheckBox();
@@ -96,6 +97,7 @@
             Controls.Add(ChkRunAsAdmin);
             Controls.Add(BtnRunScript);
             Controls.Add(BtnSelectScript);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(260, 180);
             Name = "MainWindow";
