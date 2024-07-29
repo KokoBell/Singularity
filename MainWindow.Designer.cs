@@ -31,15 +31,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             BtnSelectScript = new Button();
             BtnRunScript = new Button();
-            ChkRunAsAdmin = new CheckBox();
             flLayout = new FlowLayoutPanel();
             txtFileName = new TextBox();
+            MainMenuStrip = new MenuStrip();
+            runAsAdministratorMenuItem = new ToolStripMenuItem();
+            runAsAdministratorToolStripMenuItem = new ToolStripMenuItem();
             flLayout.SuspendLayout();
+            MainMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // BtnSelectScript
             // 
-            BtnSelectScript.Location = new Point(12, 103);
+            BtnSelectScript.Location = new Point(12, 110);
             BtnSelectScript.Name = "BtnSelectScript";
             BtnSelectScript.Size = new Size(94, 23);
             BtnSelectScript.TabIndex = 0;
@@ -49,7 +52,7 @@
             // 
             // BtnRunScript
             // 
-            BtnRunScript.Location = new Point(127, 103);
+            BtnRunScript.Location = new Point(129, 110);
             BtnRunScript.Name = "BtnRunScript";
             BtnRunScript.Size = new Size(94, 23);
             BtnRunScript.TabIndex = 1;
@@ -57,25 +60,15 @@
             BtnRunScript.UseVisualStyleBackColor = true;
             BtnRunScript.Click += BtnRunScript_Click;
             // 
-            // ChkRunAsAdmin
-            // 
-            ChkRunAsAdmin.AutoSize = true;
-            ChkRunAsAdmin.Location = new Point(12, 9);
-            ChkRunAsAdmin.Name = "ChkRunAsAdmin";
-            ChkRunAsAdmin.Size = new Size(137, 19);
-            ChkRunAsAdmin.TabIndex = 3;
-            ChkRunAsAdmin.Text = "Run as Administrator";
-            ChkRunAsAdmin.UseVisualStyleBackColor = true;
-            // 
             // flLayout
             // 
             flLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flLayout.AutoSize = true;
             flLayout.BackColor = SystemColors.Control;
             flLayout.Controls.Add(txtFileName);
-            flLayout.Location = new Point(12, 34);
+            flLayout.Location = new Point(12, 27);
             flLayout.Name = "flLayout";
-            flLayout.Size = new Size(214, 54);
+            flLayout.Size = new Size(214, 76);
             flLayout.TabIndex = 4;
             // 
             // txtFileName
@@ -85,16 +78,39 @@
             txtFileName.Multiline = true;
             txtFileName.Name = "txtFileName";
             txtFileName.ReadOnly = true;
-            txtFileName.Size = new Size(208, 48);
+            txtFileName.Size = new Size(208, 70);
             txtFileName.TabIndex = 0;
+            // 
+            // MainMenuStrip
+            // 
+            MainMenuStrip.Items.AddRange(new ToolStripItem[] { runAsAdministratorMenuItem });
+            MainMenuStrip.Location = new Point(0, 0);
+            MainMenuStrip.Name = "MainMenuStrip";
+            MainMenuStrip.Size = new Size(244, 24);
+            MainMenuStrip.TabIndex = 5;
+            MainMenuStrip.Text = "Options";
+            // 
+            // runAsAdministratorMenuItem
+            // 
+            runAsAdministratorMenuItem.DropDownItems.AddRange(new ToolStripItem[] { runAsAdministratorToolStripMenuItem });
+            runAsAdministratorMenuItem.Name = "runAsAdministratorMenuItem";
+            runAsAdministratorMenuItem.Size = new Size(61, 20);
+            runAsAdministratorMenuItem.Text = "Options";
+            // 
+            // runAsAdministratorToolStripMenuItem
+            // 
+            runAsAdministratorToolStripMenuItem.CheckOnClick = true;
+            runAsAdministratorToolStripMenuItem.Name = "runAsAdministratorToolStripMenuItem";
+            runAsAdministratorToolStripMenuItem.Size = new Size(187, 22);
+            runAsAdministratorToolStripMenuItem.Text = "Run As Administrator";
             // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(244, 141);
+            Controls.Add(MainMenuStrip);
             Controls.Add(flLayout);
-            Controls.Add(ChkRunAsAdmin);
             Controls.Add(BtnRunScript);
             Controls.Add(BtnSelectScript);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -104,6 +120,8 @@
             Text = "Singularity";
             flLayout.ResumeLayout(false);
             flLayout.PerformLayout();
+            MainMenuStrip.ResumeLayout(false);
+            MainMenuStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -111,8 +129,11 @@
         #endregion
         public Button BtnSelectScript;
         public Button BtnRunScript;
-        public CheckBox ChkRunAsAdmin;
         private FlowLayoutPanel flLayout;
         public TextBox txtFileName;
+        private ContextMenuStrip MainMenu;
+        private MenuStrip MainMenuStrip;
+        private ToolStripMenuItem runAsAdministratorMenuItem;
+        private ToolStripMenuItem runAsAdministratorToolStripMenuItem;
     }
 }

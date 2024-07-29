@@ -21,7 +21,7 @@ namespace Singularity
         {
             string[] arguments = txtFileName.Text.Split(' ', StringSplitOptions.None);
 
-            if (!ChkRunAsAdmin.Checked)
+            if (!runAsAdministratorToolStripMenuItem.Checked)
             {
                 _scriptHandler.RunScript(arguments);
             }
